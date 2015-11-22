@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Общие друзья</string>
+    <string name="action_sign_in_short">Войти на VK</string>
+
+    <string name="drawer_builder_main">Главная</string>
+    <string name="drawer_builder_share">Поделиться</string>
+    <string name="drawer_builder_log_out">Выйти</string>
+    <string name="not_chosen">Не Выбрано</string>
+</resources>
