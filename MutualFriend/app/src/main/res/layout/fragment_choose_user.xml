@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <!-- Editext для поиска-->
+        <EditText
+            android:id="@+id/etInputSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_search_friends" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
     <ListView
         android:id="@+id/lvFriends"
         android:layout_marginTop="10dp"
@@ -13,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:dividerHeight="5dp"
+        android:layout_below="@+id/input_layout_password"
         android:divider="@color/vk_share_link_title_color"
         android:background="@color/md_white_1000"
         android:layout_marginRight="10dp">

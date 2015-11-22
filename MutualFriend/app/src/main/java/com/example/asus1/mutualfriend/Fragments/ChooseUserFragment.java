@@ -2,11 +2,14 @@ package com.example.asus1.mutualfriend.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.asus1.mutualfriend.Adapters.FriednsAdapter;
@@ -42,6 +45,7 @@ public class ChooseUserFragment extends android.support.v4.app.Fragment {
     // Для адаптера
     private FriednsAdapter friednsAdapter;
     private ListView lvGoods;
+    private EditText etInputSearch;
 
     public ChooseUserFragment(int numberUser) {
         super();
@@ -60,12 +64,9 @@ public class ChooseUserFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_choose_user, container, false);
 
         lvGoods = (ListView) view.findViewById(R.id.lvFriends);
+        etInputSearch = (EditText) view.findViewById(R.id.etInputSearch);
         arUsers = new ArrayList<User>();
 
-
-
-
-        // imageLoader.init(ImageLoaderConfiguration.createDefault(context));
         VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.FIELDS, "contacts,id,first_name,last_name,sex,bdate,city,photo_max_orig"));
         request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override
@@ -97,6 +98,22 @@ public class ChooseUserFragment extends android.support.v4.app.Fragment {
                 } catch (JSONException e) {
                     Log.e("MyApp", "wrong");
                 }
+            }
+        });
+        // Живой поиск для  EditText
+        etInputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                friednsAdapter.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
 

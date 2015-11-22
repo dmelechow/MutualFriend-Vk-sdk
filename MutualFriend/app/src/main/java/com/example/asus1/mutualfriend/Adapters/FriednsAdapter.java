@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,14 +20,16 @@ import java.util.ArrayList;
 /**
  * Created by Asus1 on 22.11.2015.
  */
-public class FriednsAdapter extends BaseAdapter {
+public class FriednsAdapter extends BaseAdapter implements Filterable {
     LayoutInflater lInflater;
     Context context;
     ArrayList<User> objects;
-    //int image;
+    ArrayList<User> filterObjects;
+    private ItemFilter mFilter = new ItemFilter();
     public FriednsAdapter(Context context, ArrayList<User> arUsers) {
         this.context = context;
         this.objects = arUsers;
+        this.filterObjects = arUsers;
 
         lInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,12 +37,12 @@ public class FriednsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return objects.size();
+        return filterObjects.size();
     }
 
     @Override
     public User getItem(int position) {
-        return objects.get(position);
+        return filterObjects.get(position);
     }
 
     @Override
@@ -76,6 +80,10 @@ public class FriednsAdapter extends BaseAdapter {
         return view;
     }
 
+    @Override
+    public Filter getFilter() {
+        return mFilter;
+    }
 
     private static class Holder {
         public TextView tvFirstName;
@@ -83,4 +91,42 @@ public class FriednsAdapter extends BaseAdapter {
         public ImageView imAvatar;
 
     }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final ArrayList<User> list = objects;
+
+            int count = list.size();
+            final ArrayList<User> nlist = new ArrayList<User>(count);
+
+            String filterableString ;
+
+            for (int i = 0; i < count; i++) {
+                filterableString = list.get(i).getFirst_name() + " " + list.get(i).getLast_name();
+                if (filterableString.toLowerCase().contains(filterString)) {
+                    nlist.add(list.get(i));
+                }
+            }
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filterObjects = (ArrayList<User>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
+
 }

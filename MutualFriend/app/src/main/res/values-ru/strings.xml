@@ -6,4 +6,5 @@
     <string name="drawer_builder_share">Поделиться</string>
     <string name="drawer_builder_log_out">Выйти</string>
     <string name="not_chosen">Не Выбрано</string>
+    <string name="input_search_friends">Поиск друзей ...</string>
 </resources>

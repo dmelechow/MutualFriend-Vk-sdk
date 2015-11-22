@@ -8,5 +8,6 @@
     <string name="drawer_builder_share">Share</string>
     <string name="drawer_builder_log_out">Log Out</string>
     <string name="not_chosen">Not Chosen</string>
+    <string name="input_search_friends">Search friends ...</string>
 
 </resources>
