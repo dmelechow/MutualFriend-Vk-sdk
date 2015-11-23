@@ -24,7 +24,7 @@ public class FriednsAdapter extends BaseAdapter implements Filterable {
     LayoutInflater lInflater;
     Context context;
     ArrayList<User> objects;
-    ArrayList<User> filterObjects;
+    static ArrayList<User> filterObjects;
     private ItemFilter mFilter = new ItemFilter();
     public FriednsAdapter(Context context, ArrayList<User> arUsers) {
         this.context = context;
@@ -50,6 +50,9 @@ public class FriednsAdapter extends BaseAdapter implements Filterable {
         return position;
     }
     // товар по позиции
+    public static User getfilterObjects(int position) {
+        return filterObjects.get(position);
+    }
     User getGood(int position) {
         return ((User) getItem(position));
     }

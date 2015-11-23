@@ -43,7 +43,7 @@ public class ChooseUserFragment extends android.support.v4.app.Fragment {
     ArrayList<User> arUsers;
 
     // Для адаптера
-    private FriednsAdapter friednsAdapter;
+    static private FriednsAdapter friednsAdapter;
     private ListView lvGoods;
     private EditText etInputSearch;
 
@@ -91,7 +91,8 @@ public class ChooseUserFragment extends android.support.v4.app.Fragment {
                     lvGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            mListener.onUserSelected(arUsers.get(position),numberUser);
+                           // mListener.onUserSelected(arUsers.get(position),numberUser);
+                           mListener.onUserSelected(friednsAdapter.getfilterObjects(position),numberUser);
                             getFragmentManager().popBackStack();
                         }
                     });
@@ -116,7 +117,6 @@ public class ChooseUserFragment extends android.support.v4.app.Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-
         return view;
     }
 

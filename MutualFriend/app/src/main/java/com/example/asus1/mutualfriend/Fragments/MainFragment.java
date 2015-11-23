@@ -72,7 +72,7 @@ public class MainFragment extends Fragment{
         gridView.setAdapter(griedViewAdapter);
         if(arExUsers.get(0).getId() != 0 && arExUsers.get(1).getId() != 0){
             //VKRequest request = VKApi.friends().get(VKParameters.from(VKApiConst.FIELDS, "contacts,id,first_name,last_name,sex,bdate,city,photo_max_orig"));
-            VKRequest request = VKApi.friends().getMutual(VKParameters.from(VKApiConst.FIELDS,arExUsers.get(0).getId(), arExUsers.get(1).getId(), "contacts,id,first_name,last_name,sex,bdate,city,photo_max_orig"));
+            VKRequest request = VKApi.friends().getMutual(VKParameters.from(arExUsers.get(0).getId(),arExUsers.get(0).getId(), arExUsers.get(1).getId(),arExUsers.get(1).getId()));
                     request.executeWithListener(new VKRequest.VKRequestListener() {
                         @Override
                         public void onError(VKError error) {
